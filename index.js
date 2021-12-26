@@ -2,13 +2,16 @@ const core = require('@actions/core');
 const {
   ECS,
 } = require('@aws-sdk/client-ecs')
-const ecsClient = new ECS({ region: 'us-west-2' })
 
 async function run() {
   try {
-      const imageFamily = core.getInput('imageFamily', { required: true })
+    const imageFamily = core.getInput('imageFamily', { required: true })
+    const accessKeyId = core.getInput('awsAccessKeyId', {required: true})
+    const secretAccessKey = core.getInput('awsSecretAccessKey', {required: true})
 
-      const listClusterResponse = await ecsClient.listClusters({ maxResults: 100 })
+    const ecsClient = new ECS({ region: 'us-west-2', credentials: {accessKeyId, secretAccessKey} })
+
+    const listClusterResponse = await ecsClient.listClusters({ maxResults: 100 })
       const clusterArns = listClusterResponse.clusterArns
       const describeClustersResponse = await ecsClient.describeClusters({
         clusters: clusterArns,
