@@ -15,4 +15,4 @@ outputs:
     description: 'Array of simplified ECS service objects'
 runs:
   using: 'node12'
-  main: 'index.js'
+  main: 'dist/index.js'
