@@ -54,6 +54,7 @@ async function run() {
           return {
             serviceName: service.serviceName,
             taskDefinitionFamily: taskDefinition.family,
+            taskDefinitionArn: taskDefinition.taskDefinitionArn,
             clusterName,
             images: taskDefinition.containerDefinitions.map(
               containerDef => containerDef.image,
