@@ -1,13 +1,18 @@
-name: 'Wait'
-description: 'Wait a designated number of milliseconds'
+name: 'ECS services for Image'
+description: 'Get all ECS task definitions that use a given image family'
 inputs:
-  milliseconds:  # id of input
-    description: 'number of milliseconds to wait'
+  imageFamily:
+    description: 'Image family'
     required: true
-    default: '1000'
+  awsAccessKeyId:
+    description: 'AWS Access Key ID'
+    required: true
+  awsSecretAccessKey:
+    description: 'AWS Secret Access Key'
+    required: true
 outputs:
-  time: # output will be available to future steps
-    description: 'The current time after waiting'
+  services:
+    description: 'Array of simplified ECS service objects'
 runs:
   using: 'node12'
-  main: 'dist/index.js'
+  main: 'index.js'
